@@ -31,6 +31,13 @@ async function run() {
       const result = await cursor.toArray();
       res.send(result);
     });
+    // Post Api
+    app.post('/orders', async (req, res) => {
+      const order = req.body;
+      console.log(order);
+      const result = await finalOrder.insertOne(order);
+      res.json(result);
+    });
   } finally {
     // await client.close();
   }
