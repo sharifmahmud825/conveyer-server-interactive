@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const { MongoClient } = require('mongodb');
+const axios = require('axios').default;
 require('dotenv').config();
 const app = express();
 const port = process.env.PORT || 5000;
@@ -24,6 +25,7 @@ async function run() {
     console.log('connected');
     const database = client.db('deliveryCollection');
     const orders = database.collection('orders');
+    const finalOrder = database.collection('finalOrders');
 
     app.get('/services', async (req, res) => {
       const cursor = orders.find({});
