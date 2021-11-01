@@ -25,12 +25,21 @@ async function run() {
     const database = client.db('deliveryCollection');
     const orders = database.collection('orders');
     const finalOrder = database.collection('finalOrders');
-
+    // Post Api
+    app.post('/service', (req, res) => {
+      // orders.insertOne(req.body).then((result) => {
+      //   res.send(result.insertedId);
+      const cursor = req.body;
+      const result = await orders.insertOne(cursor);
+      res.send(result.insertedId);
+    });
+    // get Api
     app.get('/services', async (req, res) => {
       const cursor = orders.find({});
       const result = await cursor.toArray();
       res.send(result);
     });
+
     // Post Api
     app.post('/orders', async (req, res) => {
       const order = req.body;
