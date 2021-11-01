@@ -31,7 +31,7 @@ async function run() {
       //   res.send(result.insertedId);
       const cursor = req.body;
       const result = await orders.insertOne(cursor);
-      res.send(result.insertedId);
+      res.json(result.insertedId);
     });
     // get Api
     app.get('/services', async (req, res) => {
